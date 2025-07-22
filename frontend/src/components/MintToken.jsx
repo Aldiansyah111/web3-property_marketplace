@@ -1,4 +1,3 @@
-// components/MintToken.jsx
 import { useState } from 'react';
 import { mintToken } from '../context/mytoken';
 
@@ -17,28 +16,42 @@ export default function MintToken({ signer }) {
   };
 
   return (
-    <div className="border border-green-300 p-4 rounded mt-6">
-      <h2 className="font-semibold mb-2">🔨 Mint Token (Owner Only)</h2>
-      <input
-        type="text"
-        placeholder="Address tujuan"
-        value={toAddress}
-        onChange={(e) => setToAddress(e.target.value)}
-        className="border px-3 py-2 rounded w-full mb-2"
-      />
-      <input
-        type="number"
-        placeholder="Jumlah token"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        className="border px-3 py-2 rounded w-full mb-2"
-      />
-      <button
-        onClick={handleMint}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Mint Token
-      </button>
+    <div className="mt-10 bg-white border border-gray-200 rounded-xl shadow p-6 max-w-lg">
+      <h2 className="text-xl font-bold mb-4 text-gray-800">🔨 Mint Token (Owner Only)</h2>
+
+      <div className="space-y-4">
+        {/* Input Address */}
+        <div>
+          <label className="block text-sm text-gray-600 mb-1">📮 Address Tujuan</label>
+          <input
+            type="text"
+            placeholder="0x123..."
+            value={toAddress}
+            onChange={(e) => setToAddress(e.target.value)}
+            className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          />
+        </div>
+
+        {/* Input Amount */}
+        <div>
+          <label className="block text-sm text-gray-600 mb-1">💰 Jumlah Token</label>
+          <input
+            type="number"
+            placeholder="e.g. 1000"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          />
+        </div>
+
+        {/* Mint Button */}
+        <button
+          onClick={handleMint}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition font-semibold"
+        >
+          🚀 Mint Token
+        </button>
+      </div>
     </div>
   );
 }

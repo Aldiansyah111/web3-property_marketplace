@@ -16,6 +16,7 @@ import MintToken from '../components/MintToken';
 import { ethers } from 'ethers';
 import mytokenAbi from '../context/mytoken.json';
 import { MYTOKEN_ADDRESS, STAKING_ADDRESS } from '../utils/constants';
+  import { ShieldCheck, UploadCloud, Wallet } from "lucide-react";
 
 export default function Staking() {
     const [signer, setSigner] = useState(null);
@@ -120,84 +121,160 @@ export default function Staking() {
         );
     }
 
-    return (
-        <div className="min-h-screen pt-32 px-6 pb-16">
-            <h1 className="text-3xl font-bold mb-8 text-gray-800">🚀 Staking Dashboard</h1>
 
-            <div className="max-w-2xl mx-auto flex flex-col gap-8">
+    // return (
+    //     <div className="min-h-screen pt-32 px-6 pb-16">
+    //         <h1 className="text-3xl font-bold mb-8 text-gray-800">🚀 Staking Dashboard</h1>
+
+    //         <div className="max-w-2xl mx-auto flex flex-col gap-8">
+    //             <WalletInfo address={walletAddress} balance={balance} />
+
+    //             {/* <div className="bg-white rounded-xl shadow-md p-6 space-y-4">
+    //       <input
+    //         type="number"
+    //         placeholder="Amount to stake"
+    //         value={amount}
+    //         onChange={(e) => setAmount(e.target.value)}
+    //         className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+    //       />
+    //       <button
+    //         onClick={handleApprove}
+    //         disabled={loading}
+    //         className="w-full bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition"
+    //       >
+    //         Approve Token
+    //       </button>
+    //       <button
+    //         onClick={handleStake}
+    //         disabled={loading}
+    //         className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition"
+    //       >
+    //         Stake
+    //       </button>
+    //       <button
+    //         onClick={handleWithdraw}
+    //         disabled={loading}
+    //         className="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition"
+    //       >
+    //         Withdraw
+    //       </button>
+    //     </div> */}
+
+    //             <div className="bg-white rounded-xl shadow-md p-20 space-y-8 border border-gray-200 ">
+    //                 {/* Label + Input */}
+    //                 <div className="space-y-4 text-center">
+    //                     <label className="block font-bold text-gray-700">💸 Amount to Stake</label>
+    //                     <input
+    //                         type="number"
+    //                         placeholder="e.g. 100"
+    //                         value={amount}
+    //                         onChange={(e) => setAmount(e.target.value)}
+    //                         className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+    //                     />
+    //                 </div>
+
+    //                 {/* Buttons */}
+    //                 <button
+    //                     onClick={handleApprove}
+    //                     disabled={loading}
+    //                     className=" text-left cursor-pointer w-full bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition font-semibold"
+    //                 >
+    //                     🔐 Approve Token
+    //                 </button>
+
+    //                 <button
+    //                     onClick={handleStake}
+    //                     disabled={loading}
+    //                     className=" text-left cursor-pointer w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition font-semibold"
+    //                 >
+    //                     📥 Stake Now
+    //                 </button>
+
+    //                 <button
+    //                     onClick={handleWithdraw}
+    //                     disabled={loading}
+    //                     className=" text-left cursor-pointer w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition font-semibold"
+    //                 >
+    //                     💸 Withdraw Stake
+    //                 </button>
+    //             </div>
+
+
+    //             {stakeInfo && parseFloat(stakeInfo.balance) > 0 && (
+    //                 <RewardCard
+    //                     balance={stakeInfo.balance}
+    //                     stakedAt={stakeInfo.stakedAt}
+    //                     reward={calculateReward(stakeInfo.balance, stakeInfo.stakedAt)}
+    //                     progress={getStakeProgress(stakeInfo.stakedAt)}
+    //                 />
+    //             )}
+
+    //             {isOwner && <MintToken signer={signer} />}
+    //         </div>
+    //     </div>
+    // );
+
+
+
+
+
+
+    return (
+        <div className="min-h-screen pt-32 px-6 pb-16 bg-gradient-to-br from-white to-slate-50">
+            <h1 className="text-3xl md:text-4xl font-bold mb-10 text-gray-800 text-center">
+                🚀 Staking Dashboard
+            </h1>
+
+            <div className="max-w-3xl mx-auto flex flex-col gap-10">
+                {/* Wallet Info */}
                 <WalletInfo address={walletAddress} balance={balance} />
 
-                {/* <div className="bg-white rounded-xl shadow-md p-6 space-y-4">
-          <input
-            type="number"
-            placeholder="Amount to stake"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button
-            onClick={handleApprove}
-            disabled={loading}
-            className="w-full bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition"
-          >
-            Approve Token
-          </button>
-          <button
-            onClick={handleStake}
-            disabled={loading}
-            className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition"
-          >
-            Stake
-          </button>
-          <button
-            onClick={handleWithdraw}
-            disabled={loading}
-            className="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition"
-          >
-            Withdraw
-          </button>
-        </div> */}
+                {/* Stake Form Card */}
+                <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-200 space-y-8">
+                    <div className="flex items-center gap-3 mb-4">
+                        <Wallet className="text-blue-600 w-6 h-6" />
+                        <h2 className="text-xl font-semibold text-gray-800">Stake Your Tokens</h2>
+                    </div>
 
-                <div className="bg-white rounded-xl shadow-md p-20 space-y-8 border border-gray-200 ">
-                    {/* Label + Input */}
-                    <div className="space-y-4 text-center">
-                        <label className="block font-bold text-gray-700">💸 Amount to Stake</label>
+                    <div className="space-y-4">
+                        <label className="block text-gray-700 font-medium">💰 Amount to Stake</label>
                         <input
                             type="number"
-                            placeholder="e.g. 100"
+                            placeholder="Enter token amount (e.g. 100)"
                             value={amount}
                             onChange={(e) => setAmount(e.target.value)}
-                            className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-700"
                         />
                     </div>
 
-                    {/* Buttons */}
-                    <button
-                        onClick={handleApprove}
-                        disabled={loading}
-                        className=" text-left cursor-pointer w-full bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition font-semibold"
-                    >
-                        🔐 Approve Token
-                    </button>
+                    <div className="flex flex-col md:flex-row gap-4 justify-between pt-4">
+                        <button
+                            onClick={handleApprove}
+                            disabled={loading}
+                            className="flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2.5 rounded-lg font-medium transition"
+                        >
+                            <ShieldCheck size={18} /> Approve Token
+                        </button>
 
-                    <button
-                        onClick={handleStake}
-                        disabled={loading}
-                        className=" text-left cursor-pointer w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition font-semibold"
-                    >
-                        📥 Stake Now
-                    </button>
+                        <button
+                            onClick={handleStake}
+                            disabled={loading}
+                            className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium transition"
+                        >
+                            <UploadCloud size={18} /> Stake Now
+                        </button>
 
-                    <button
-                        onClick={handleWithdraw}
-                        disabled={loading}
-                        className=" text-left cursor-pointer w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition font-semibold"
-                    >
-                        💸 Withdraw Stake
-                    </button>
+                        <button
+                            onClick={handleWithdraw}
+                            disabled={loading}
+                            className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg font-medium transition"
+                        >
+                            💸 Withdraw
+                        </button>
+                    </div>
                 </div>
 
-
+                {/* Reward Info */}
                 {stakeInfo && parseFloat(stakeInfo.balance) > 0 && (
                     <RewardCard
                         balance={stakeInfo.balance}
@@ -207,8 +284,10 @@ export default function Staking() {
                     />
                 )}
 
+                {/* Owner Mint Section */}
                 {isOwner && <MintToken signer={signer} />}
             </div>
         </div>
     );
+
 }
